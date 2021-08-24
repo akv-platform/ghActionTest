@@ -65,12 +65,10 @@ jobs:
 
 
     - name: Build
+      shell: bash
       run: |
-         Write-Host "ROOT a:"
-         $env:VCPKG_ROOT
-         [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
-         Write-Host "ROOT b:"
-         $env:VCPKG_ROOT
+         set
+         export VCPKG_ROOT='C:\vcpkg'
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
