@@ -58,17 +58,19 @@ jobs:
       run: |
         nuget install Grasshopper
 
-    - name: root
+    - name: set root
       run: |
-        [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
-        Write-Host "ROOT: ${env:VCPKG_ROOT}"
+        setx VCPKG_ROOT 'C:\vcpkg' /M
+
+    - name: see root
+      shell: bash
+      run: |
+        set
 
 
     - name: Build
-      shell: bash
       run: |
-         set
-         export VCPKG_ROOT='C:\vcpkg'
+         setx VCPKG_ROOT 'C:\vcpkg' /M
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
