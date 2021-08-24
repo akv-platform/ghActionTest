@@ -15,7 +15,6 @@ jobs:
     
     - name: find vcpkg
       run: |
-        vcpkg integrate install
         Get-ChildItem . -Recurse | Select-String "vcpkg"
         
 
@@ -54,23 +53,18 @@ jobs:
         vcpkg integrate install
         Get-ChildItem . -Recurse | Select-String "vcpkg"
         
+    - name: find vcpkg
+      run: |
+        Get-ChildItem . -Recurse | Select-String "vcpkg"
+        
     - name: install Grasshopper
       run: |
         nuget install Grasshopper
 
-    - name: set root
-      run: |
-        setx VCPKG_ROOT 'C:\vcpkg' /M
-
-    - name: see root
-      shell: bash
-      run: |
-        set
-
-
     - name: Build
       run: |
-         setx VCPKG_ROOT 'C:\vcpkg' /M
+         $env:VCPKG_ROOT = 'C:\vcpkg'
+         $env:VCPKG_ROOT
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
