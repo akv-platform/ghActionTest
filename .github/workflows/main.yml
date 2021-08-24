@@ -66,9 +66,11 @@ jobs:
 
     - name: Build
       run: |
-         Write-Host "ROOT a: ${env:VCPKG_ROOT}"
+         Write-Host "ROOT a:"
+         $env:VCPKG_ROOT
          [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
-         Write-Host "ROOT b: ${env:VCPKG_ROOT}"
+         Write-Host "ROOT b:"
+         $env:VCPKG_ROOT
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
