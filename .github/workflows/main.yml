@@ -36,6 +36,7 @@ jobs:
       run: |
         vcpkg install eigen3 libigl
         dir
+        dir C:\vcpkg
         
 
     - name: integrate install
