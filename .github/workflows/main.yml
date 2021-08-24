@@ -32,8 +32,8 @@ jobs:
         
     - name: Install packages and dependencies
       run: |
-        bootstrap-vcpkg
-        dir
+        #bootstrap-vcpkg
+        #dir
         vcpkg install eigen3 libigl
         dir
         vcpkg integrate install
