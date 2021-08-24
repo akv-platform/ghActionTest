@@ -29,15 +29,22 @@ jobs:
     - name: bootstrap-vcpkg
       run: |
         get-command bootstrap-vcpkg
-        
-    - name: Install packages and dependencies
-      run: |
         #bootstrap-vcpkg
         #dir
+
+    - name: Install  eigen3 libigl
+      run: |
         vcpkg install eigen3 libigl
         dir
+        
+
+    - name: integrate install
+      run: |
         vcpkg integrate install
         dir
+        
+    - name: install Grasshopper
+      run: |
         nuget install Grasshopper
 
     - name: Build
