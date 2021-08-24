@@ -55,7 +55,7 @@ jobs:
 
     - name: Build
       run: |
-         $Env:VCPKG_ROOT = "C:\vcpkg"
+         [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
