@@ -37,6 +37,7 @@ jobs:
         vcpkg install eigen3 libigl
         dir
         dir C:\vcpkg
+        dir C:\vcpkg\installed
         
 
     - name: integrate install
@@ -48,14 +49,17 @@ jobs:
       run: |
         nuget install Grasshopper
 
-    - name: install Grasshopper
+    - name: root
       run: |
+        [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
         Write-Host "ROOT: $env:VCPKG_ROOT"
 
 
     - name: Build
       run: |
+         Write-Host "ROOT a: $env:VCPKG_ROOT"
          [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
+         Write-Host "ROOT b: $env:VCPKG_ROOT"
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
