@@ -40,6 +40,7 @@ jobs:
         dir C:\vcpkg\installed
         dir C:\vcpkg\installed\vcpkg
         dir C:\vcpkg\installed\x86-windows
+        dir C:\vcpkg\installed\x86-windows\include
         
 
     - name: integrate install
