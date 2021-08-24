@@ -50,12 +50,12 @@ jobs:
 
     - name: install Grasshopper
       run: |
-        Write-Host "ROOT: ${env:VCPKG_ROOT}"
+        Write-Host "ROOT: $env:VCPKG_ROOT"
 
 
     - name: Build
       run: |
-         ${env:VCPKG_ROOT} = "C:\vcpkg"
+         $Env:VCPKG_ROOT = "C:\vcpkg"
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
