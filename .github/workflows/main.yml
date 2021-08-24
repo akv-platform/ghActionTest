@@ -12,6 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: find vcpkg
+      run: |
+        vcpkg integrate install
+        Get-ChildItem . -Recurse | Select-String "vcpkg"
+        
 
     - name: Add msbuild to PATH (include NuGet, vcpkg)
       uses: microsoft/setup-msbuild@v1.0.2
@@ -46,7 +52,7 @@ jobs:
     - name: integrate install
       run: |
         vcpkg integrate install
-        dir
+        Get-ChildItem . -Recurse | Select-String "vcpkg"
         
     - name: install Grasshopper
       run: |
@@ -55,14 +61,14 @@ jobs:
     - name: root
       run: |
         [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
-        Write-Host "ROOT: $env:VCPKG_ROOT"
+        Write-Host "ROOT: ${env:VCPKG_ROOT}"
 
 
     - name: Build
       run: |
-         Write-Host "ROOT a: $env:VCPKG_ROOT"
+         Write-Host "ROOT a: ${env:VCPKG_ROOT}"
          [System.Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\vcpkg',[System.EnvironmentVariableTarget]::Machine)
-         Write-Host "ROOT b: $env:VCPKG_ROOT"
+         Write-Host "ROOT b: ${env:VCPKG_ROOT}"
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
       #run: msbuild /p:IncludePath="external/eigen;external/libigl/include
