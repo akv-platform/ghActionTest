@@ -62,8 +62,9 @@ jobs:
         nuget install Grasshopper
 
     - name: Build
+      env:
+        VCPKG_ROOT: C:\vcpkg
       run: |
-         $env:VCPKG_ROOT = 'C:\vcpkg'
          $env:VCPKG_ROOT
          msbuild
 #       run: msbuild /p:IncludePath="./external/libigl/include"
