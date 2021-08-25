@@ -41,6 +41,7 @@ jobs:
 
     - name: integrate install
       run: |
+        Remove-Item -Recurse -Force c:\vcpkg
         git clone https://github.com/microsoft/vcpkg
         .\vcpkg\bootstrap-vcpkg.bat
         .\vcpkg\vcpkg integrate install
@@ -49,19 +50,15 @@ jobs:
     - name: Install  eigen3 libigl
       run: |
         .\vcpkg\vcpkg install eigen3 libigl
-      
-        
-    - name: find vcpkg
-      run: |
-        Get-ChildItem . -Recurse | Select-String "vcpkg"
         
     - name: install Grasshopper
       run: |
         nuget install Grasshopper
 
     - name: Build
-   #   env:
-   #     VCPKG_ROOT: C:\vcpkg
+      env:
+        VCPKG_ROOT: vcpkg
+        VCPKG_INSTALLATION_ROOT: vcpkg
       run: |
          $env:VCPKG_ROOT
          msbuild
