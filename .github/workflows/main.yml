@@ -31,11 +31,13 @@ jobs:
     #     git clone https://github.com/libigl/libigl.git ./external/libigl
     #     git clone https://gitlab.com/libeigen/eigen.git ./external/eigen
     #     set ILink_LibraryPath="./external/libigl/include;./external/eigen"
+        
     - name: bootstrap-vcpkg
+      if: ${{ false }}
       run: |
         get-command bootstrap-vcpkg
         #bootstrap-vcpkg
-        #dir
+        #dir        
 
     - name: Install  eigen3 libigl
       run: |
@@ -50,7 +52,9 @@ jobs:
 
     - name: integrate install
       run: |
-        vcpkg integrate install
+        git clone https://github.com/microsoft/vcpkg
+        .\vcpkg\bootstrap-vcpkg.bat
+        .\vcpkg\vcpkg integrate install
         Get-ChildItem . -Recurse | Select-String "vcpkg"
         
     - name: find vcpkg
@@ -62,8 +66,8 @@ jobs:
         nuget install Grasshopper
 
     - name: Build
-      env:
-        VCPKG_ROOT: C:\vcpkg
+   #   env:
+   #     VCPKG_ROOT: C:\vcpkg
       run: |
          $env:VCPKG_ROOT
          msbuild
