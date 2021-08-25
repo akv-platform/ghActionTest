@@ -39,23 +39,23 @@ jobs:
         #bootstrap-vcpkg
         #dir        
 
-    - name: Install  eigen3 libigl
-      run: |
-        vcpkg install eigen3 libigl
-        dir
-        dir C:\vcpkg
-        dir C:\vcpkg\installed
-        dir C:\vcpkg\installed\vcpkg
-        dir C:\vcpkg\installed\x86-windows
-        dir C:\vcpkg\installed\x86-windows\include
-        
-
     - name: integrate install
       run: |
         git clone https://github.com/microsoft/vcpkg
         .\vcpkg\bootstrap-vcpkg.bat
         .\vcpkg\vcpkg integrate install
         Get-ChildItem . -Recurse | Select-String "vcpkg"
+        
+    - name: Install  eigen3 libigl
+      run: |
+        .\vcpkg\vcpkg install eigen3 libigl
+        dir
+        dir C:\vcpkg
+        dir C:\vcpkg\installed
+        dir C:\vcpkg\installed\vcpkg
+        dir C:\vcpkg\installed\x86-windows
+        dir C:\vcpkg\installed\x86-windows\include
+      
         
     - name: find vcpkg
       run: |
